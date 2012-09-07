@@ -70,7 +70,11 @@ struct pcm_config pcm_config_out = {
     .channels = 2,
     .rate = OUT_SAMPLING_RATE,
     .period_size = OUT_PERIOD_SIZE,
+#ifdef AM335XEVM
+    .period_count = 16,
+#else
     .period_count = OUT_LONG_PERIOD_COUNT,
+#endif
     .format = PCM_FORMAT_S16_LE,
     .start_threshold = OUT_PERIOD_SIZE * OUT_SHORT_PERIOD_COUNT,
 };
@@ -79,7 +83,11 @@ struct pcm_config pcm_config_in = {
     .channels = 2,
     .rate = IN_SAMPLING_RATE,
     .period_size = IN_PERIOD_SIZE,
+#ifdef AM335XEVM
+    .period_count = 16,
+#else
     .period_count = IN_PERIOD_COUNT,
+#endif
     .format = PCM_FORMAT_S16_LE,
     .start_threshold = 1,
     .stop_threshold = (IN_PERIOD_SIZE * IN_PERIOD_COUNT),
@@ -190,10 +198,7 @@ static void select_devices(struct audio_device *adev)
     if (headphone_on)
         audio_route_apply_path(adev->ar, "headphone");
     if (main_mic_on) {
-        if (adev->orientation == ORIENTATION_LANDSCAPE)
-            audio_route_apply_path(adev->ar, "main-mic-left");
-        else
-            audio_route_apply_path(adev->ar, "main-mic-top");
+        audio_route_apply_path(adev->ar, "main-mic");
     }
 
     update_mixer_state(adev->ar);
