@@ -156,6 +156,7 @@ void CameraHardware::initDefaultParameters()
 	p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FORMATS, CameraParameters::PIXEL_FORMAT_YUV422SP);
 	p.set(CameraParameters::KEY_VIDEO_FRAME_FORMAT, CameraParameters::PIXEL_FORMAT_YUV420SP);
     p.set(CameraParameters::KEY_FOCUS_MODE,0);
+    p.set(CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP,0);
 
     if (setParameters(p) != NO_ERROR) {
         ALOGE("Failed to set default parameters?!");
