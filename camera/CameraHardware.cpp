@@ -78,11 +78,11 @@ const supported_resolution CameraHardware::supportedPreviewRes[] = {{256, 256} }
 #else
 
 #ifdef _USE_USB_CAMERA_
-const char CameraHardware::supportedPictureSizes [] = "320x240,352x288";
-const char CameraHardware::supportedPreviewSizes [] = "320x240,352x288";
+const char CameraHardware::supportedPictureSizes [] = "320x240,352x288,176x144";
+const char CameraHardware::supportedPreviewSizes [] = "320x240,352x288,176x144";
 
-const supported_resolution CameraHardware::supportedPictureRes[] = {{320, 240},{352,288} };
-const supported_resolution CameraHardware::supportedPreviewRes[] = {{320, 240},{352,288}};
+const supported_resolution CameraHardware::supportedPictureRes[] = {{320, 240},{352,288},{176,144}};
+const supported_resolution CameraHardware::supportedPreviewRes[] = {{320, 240},{352,288},{176,144}};
 #else
 const char CameraHardware::supportedPictureSizes [] = "640x480,352x288,320x240";
 const char CameraHardware::supportedPreviewSizes [] = "640x480,352x288,320x240";
