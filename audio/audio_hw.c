@@ -46,6 +46,7 @@
 #define OUT_SHORT_PERIOD_COUNT 2
 #define OUT_LONG_PERIOD_COUNT 8
 #define OUT_SAMPLING_RATE 44100
+#define OUT_SAMPLING_RATE_BBB 48000
 
 #define IN_PERIOD_SIZE 1024
 #define IN_PERIOD_COUNT 4
@@ -68,9 +69,15 @@ enum {
 
 struct pcm_config pcm_config_out = {
     .channels = 2,
+#ifdef BEAGLEBONEBLACK
+    .rate = OUT_SAMPLING_RATE_BBB,
+#else
     .rate = OUT_SAMPLING_RATE,
+#endif
     .period_size = OUT_PERIOD_SIZE,
 #ifdef AM335XEVM
+    .period_count = 16,
+#elif BEAGLEBONEBLACK
     .period_count = 16,
 #else
     .period_count = OUT_LONG_PERIOD_COUNT,

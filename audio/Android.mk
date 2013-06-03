@@ -25,6 +25,9 @@ else ifneq (,$(findstring flashboard, $(TARGET_PRODUCT)))
 else ifneq (,$(findstring am335xevm, $(TARGET_PRODUCT)))
     LOCAL_MODULE := audio.primary.am335xevm
     LOCAL_CFLAGS += -DAM335XEVM
+else ifneq (,$(findstring beagleboneblack, $(TARGET_PRODUCT)))
+    LOCAL_MODULE := audio.primary.beagleboneblack
+    LOCAL_CFLAGS += -DBEAGLEBONEBLACK
 else
     LOCAL_MODULE := audio.primary.generic
 endif
