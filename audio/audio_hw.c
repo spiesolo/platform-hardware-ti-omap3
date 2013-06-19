@@ -789,6 +789,74 @@ static int out_get_next_write_timestamp(const struct audio_stream_out *stream,
 }
 
 /** audio_stream_in implementation **/
+#ifdef _STUB_AUDIO_IN
+static uint32_t in_get_sample_rate(const struct audio_stream *stream)
+{
+    return 8000;
+}
+
+static int in_set_sample_rate(struct audio_stream *stream, uint32_t rate)
+{
+    return 0;
+}
+
+static size_t in_get_buffer_size(const struct audio_stream *stream)
+{
+    return 320;
+}
+
+static audio_channel_mask_t in_get_channels(const struct audio_stream *stream)
+{
+    return AUDIO_CHANNEL_IN_MONO;
+}
+
+static audio_format_t in_get_format(const struct audio_stream *stream)
+{
+    return AUDIO_FORMAT_PCM_16_BIT;
+}
+
+static int in_set_format(struct audio_stream *stream, audio_format_t format)
+{
+    return 0;
+}
+
+static int in_standby(struct audio_stream *stream)
+{
+    return 0;
+}
+
+static int in_dump(const struct audio_stream *stream, int fd)
+{
+    return 0;
+}
+
+static int in_set_parameters(struct audio_stream *stream, const char *kvpairs)
+{
+    return 0;
+}
+
+static char * in_get_parameters(const struct audio_stream *stream,
+                                const char *keys)
+{
+    return strdup("");
+}
+
+static int in_set_gain(struct audio_stream_in *stream, float gain)
+{
+    return 0;
+}
+
+static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
+                       size_t bytes)
+{
+    /* XXX: fake timing for audio input */
+    usleep(bytes * 1000000 / audio_stream_frame_size(&stream->common) /
+           in_get_sample_rate(&stream->common));
+    return bytes;
+}
+
+
+#else
 static uint32_t in_get_sample_rate(const struct audio_stream *stream)
 {
     struct stream_in *in = (struct stream_in *)stream;
@@ -965,6 +1033,7 @@ exit:
     pthread_mutex_unlock(&in->lock);
     return bytes;
 }
+#endif
 
 static uint32_t in_get_input_frames_lost(struct audio_stream_in *stream)
 {

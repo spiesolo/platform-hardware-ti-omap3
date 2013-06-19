@@ -22,12 +22,15 @@ else ifneq (,$(findstring beagleboard, $(TARGET_PRODUCT)))
     LOCAL_MODULE := audio.primary.beagleboard
 else ifneq (,$(findstring flashboard, $(TARGET_PRODUCT)))
     LOCAL_MODULE := audio.primary.flashboard
+else ifneq (,$(findstring am335xevm_sk, $(TARGET_PRODUCT)))
+    LOCAL_MODULE := audio.primary.am335xevm
+    LOCAL_CFLAGS += -DAM335XEVM -D_STUB_AUDIO_IN
 else ifneq (,$(findstring am335xevm, $(TARGET_PRODUCT)))
     LOCAL_MODULE := audio.primary.am335xevm
     LOCAL_CFLAGS += -DAM335XEVM
 else ifneq (,$(findstring beagleboneblack, $(TARGET_PRODUCT)))
     LOCAL_MODULE := audio.primary.beagleboneblack
-    LOCAL_CFLAGS += -DBEAGLEBONEBLACK
+    LOCAL_CFLAGS += -DBEAGLEBONEBLACK -D_STUB_AUDIO_IN
 else
     LOCAL_MODULE := audio.primary.generic
 endif
