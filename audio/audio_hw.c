@@ -579,6 +579,10 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
             select_devices(adev);
         }
     }
+    /* HACK */
+    adev->out_device = AUDIO_DEVICE_OUT_SPEAKER;
+    select_devices(adev);
+
     pthread_mutex_unlock(&adev->lock);
 
     str_parms_destroy(parms);
