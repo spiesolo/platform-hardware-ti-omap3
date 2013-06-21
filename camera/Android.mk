@@ -41,6 +41,13 @@ LOCAL_CFLAGS += -DCONFIG_CAMERA_CAPE
 endif
 endif
 
+# This is for beagleboneblack camera cape
+ifeq ($(TARGET_PRODUCT), beagleboneblack)
+ifeq ($(BOARD_HAVE_CAMERA_CAPE),true)
+LOCAL_CFLAGS += -DCONFIG_CAMERA_CAPE
+endif
+endif
+
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_MODULE:= camera.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS:= optional
